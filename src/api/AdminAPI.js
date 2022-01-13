@@ -10,6 +10,7 @@ export const covertDate = (date) => {
 // const url = "https://xuan-nong.herokuapp.com/api";
 // const url = "http://45.80.152.231:6699/api";
 const url = "http://localhost:6699/adminAPI";
+const urlUser = "http://localhost:6699/api";
 
 const headers = async () => {
   return { Authorization: `${await getAccessToken()}` };
@@ -65,6 +66,177 @@ export const getCountLoan = async () => {
 export const getLoan = async (page) => {
   return await axios
     .get(`${url}/loan/${page}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const importFileSending = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return await axios
+    .post(`${url}/import-file-sending`, formData, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getCountSendingContract = async () => {
+  return await axios
+    .get(`${url}/count-sending-contract`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getSendingContract = async (page) => {
+  return await axios
+    .get(`${url}/sending-contract/${page}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getCountRegisterLoan = async (page) => {
+  return await axios
+    .get(`${url}/count-register-loan`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getRegisterLoan = async (page) => {
+  return await axios
+    .get(`${url}/register-loan/${page}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const searchLoan = async (data) => {
+  return await axios
+    .post(`${urlUser}/search-loan`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const searchSendingContract = async (data) => {
+  return await axios
+    .post(`${urlUser}/search-sending-contract`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getCountUser = async () => {
+  return await axios
+    .get(`${url}/count-user`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getUser = async (page) => {
+  return await axios
+    .get(`${url}/user/${page}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getLoanBrief = async () => {
+  return await axios
+    .get(`${urlUser}/loan-brief`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const DeleteLoanBrief = async (data) => {
+  return await axios
+    .post(`${url}/delete-loan-brief`, data, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const addLoanBrief = async (data) => {
+  return await axios
+    .post(`${url}/loan-brief`, data, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateLoanBrief = async (data) => {
+  return await axios
+    .post(`${url}/update-loan-brief`, data, {
       headers: await headers(),
     })
     .then(async (res) => {

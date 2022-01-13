@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import PublishIcon from "@material-ui/icons/Publish";
-import TableComponent from "../../../../../components/Table/Table.component";
-import ModalUploadFileComponent from "../../../../../components/Modal/ModalUploadFile.component";
-import { getCountLoan, getLoan, searchLoan } from "../../../../../api/AdminAPI";
-import SearchComponent from "../../../../../components/Search/Search.component";
-export default function LoanContractManager(props) {
+import TableComponent from "../../../../components/Table/Table.component";
+import ModalUploadFileComponent from "../../../../components/Modal/ModalUploadFile.component";
+import {
+  getCountSendingContract,
+  getSendingContract,
+  searchSendingContract,
+} from "../../../../api/AdminAPI";
+import SearchComponent from "../../../../components/Search/Search.component";
+export default function SendingContractManager(props) {
+  const [listsSending, setListsSending] = useState([]);
   const [loan, setLoan] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [reload, setReload] = useState(false);
@@ -14,10 +19,10 @@ export default function LoanContractManager(props) {
   const [count, setCount] = useState(0);
   useEffect(async () => {
     props.handleLoading(true);
-    await getCountLoan().then((res) => {
+    await getCountSendingContract().then((res) => {
       setCount(res.data);
     });
-    await getLoan(page).then((res) => {
+    await getSendingContract(page).then((res) => {
       setLoan(res.data);
     });
     props.handleLoading(false);
@@ -25,20 +30,19 @@ export default function LoanContractManager(props) {
 
   useEffect(async () => {
     props.handleLoading(true);
-
-    await getLoan(page).then((res) => {
+    await getSendingContract(page).then((res) => {
       setLoan(res.data);
       props.handleLoading(false);
     });
   }, [page]);
   const columns = [
     { field: "fullName", headerName: "HỌ VÀ TÊN", width: 200 },
-    { field: "contractNumber", headerName: "SỐ HỢP ĐỒNG VAY", width: 200 },
-    { field: "loanMoney", headerName: "SỐ TIỀN VAY", width: 150 },
-    { field: "created", headerName: "NGÀY VAY", width: 150 },
+    { field: "code", headerName: "MÃ SỔ TIẾT KIỆM", width: 200 },
+    { field: "deposits", headerName: "SỐ DƯ TIỀN GỬI", width: 200 },
+    { field: "sentDate", headerName: "NGÀY GỬI", width: 150 },
     { field: "dueDay", headerName: "NGÀY ĐÁO HẠN", width: 170 },
-    { field: "debt", headerName: "DƯ NỢ HIỆN TẠI", width: 200 },
-    { field: "nextProfit", headerName: "LÃI DỰ KIẾN KÌ TIẾP THEO", width: 230 },
+    { field: "yearPercent", headerName: "LÃI SUẤT/NĂM", width: 200 },
+    { field: "nextProfit", headerName: "LÃI DỰ KIẾN ", width: 200 },
   ];
 
   const rows = loan.map((e, index) => {
@@ -46,12 +50,12 @@ export default function LoanContractManager(props) {
     return {
       id: index,
       fullName: e?.fullName,
-      contractNumber: e?.contractNumber,
-      loanMoney: e?.loanMoney?.toLocaleString("it-IT"),
-      created: e?.created,
+      code: e?.code,
+      deposits: e?.deposits.toLocaleString("it-IT"),
+      sentDate: e?.sentDate,
       dueDay: e?.dueDay,
-      debt: e?.debt?.toLocaleString("it-IT"),
-      nextProfit: e?.nextProfit?.toLocaleString("it-IT"),
+      yearPercent: e?.yearPercent.toLocaleString("it-IT"),
+      nextProfit: parseInt(e?.nextProfit.toFixed(0)).toLocaleString("it-IT"),
     };
   });
 
@@ -78,8 +82,7 @@ export default function LoanContractManager(props) {
       const data = {
         search: search,
       };
-      await searchLoan(data).then((res) => {
-        console.log(res.data);
+      await searchSendingContract(data).then((res) => {
         if (res.data) {
           setLoan([res.data]);
         } else {
@@ -91,7 +94,7 @@ export default function LoanContractManager(props) {
   return (
     <Grid>
       <div className="head-title">
-        <span className="title">QUẢN LÝ HỢP ĐỒNG VAY: ({count})</span>
+        <span className="title">QUẢN LÝ HỢP ĐỒNG GỬI: ({count})</span>
         <Button
           variant="contained"
           color="primary"
@@ -109,7 +112,6 @@ export default function LoanContractManager(props) {
       <div className="mt-2">
         <SearchComponent handleSearch={handleSearch} />
       </div>
-
       <div className="mt-3">
         <TableComponent
           columns={columns}
@@ -124,7 +126,7 @@ export default function LoanContractManager(props) {
         handleClose={handleClose}
         handleLoading={props.handleLoading}
         handleReload={handleReload}
-        status="loan"
+        status="sending"
       />
     </Grid>
   );

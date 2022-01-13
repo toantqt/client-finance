@@ -7,7 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import ButtonUploadComponent from "../ButtonUpload/ButtonUpload.component";
 import "./modal.css";
-import { importFileLoan } from "../../api/AdminAPI";
+import { importFileLoan, importFileSending } from "../../api/AdminAPI";
 
 export default function ModalUploadFileComponent(props) {
   const [open, setOpen] = React.useState(false);
@@ -37,13 +37,21 @@ export default function ModalUploadFileComponent(props) {
       alert("Xin vui lòng chọn file cần nhập");
     } else {
       props.handleLoading(true);
-
-      await importFileLoan(file).then((res) => {
-        props.handleLoading(false);
-        setfile();
-        props.handleClose();
-        props.handleReload();
-      });
+      if (props?.status === "loan") {
+        await importFileLoan(file).then(() => {
+          props.handleLoading(false);
+          setfile();
+          props.handleClose();
+          props.handleReload();
+        });
+      } else if (props?.status === "sending") {
+        await importFileSending(file).then(() => {
+          props.handleLoading(false);
+          setfile();
+          props.handleClose();
+          props.handleReload();
+        });
+      }
     }
   };
 

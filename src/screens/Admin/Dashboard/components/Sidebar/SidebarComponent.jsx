@@ -8,18 +8,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AdminSlug from "../../../../../resources/AdminSlug";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 import CategoryIcon from "@material-ui/icons/Category";
-import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
-import AspectRatioIcon from "@material-ui/icons/AspectRatio";
-import HomeWorkIcon from "@material-ui/icons/HomeWork";
-import ContactSupportIcon from "@material-ui/icons/ContactSupport";
-import LineWeightIcon from "@material-ui/icons/LineWeight";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import TimerIcon from "@material-ui/icons/Timer";
-import BeenhereIcon from "@material-ui/icons/Beenhere";
-import StoreIcon from "@material-ui/icons/Store";
-import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
+import SendIcon from "@material-ui/icons/Send";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import SubjectIcon from "@material-ui/icons/Subject";
+import CreditCardIcon from "@material-ui/icons/CreditCard";
 import "./sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -95,7 +92,7 @@ export default function SideBarComponent(props) {
             onClick={() => handleClickSlugLibrary(AdminSlug.loanContract)}
           >
             <ListItemIcon>
-              <TimerIcon />
+              <FeaturedPlayListIcon />
             </ListItemIcon>
             <ListItemText primary="Hợp đồng vay" className={classes.title} />
           </ListItem>
@@ -104,15 +101,55 @@ export default function SideBarComponent(props) {
             className={
               classes.nested + (param == "orderManager" ? " active" : "")
             }
-            onClick={() => handleClickSlugLibrary(AdminSlug.dealerManager)}
+            onClick={() => handleClickSlugLibrary(AdminSlug.sendingContract)}
           >
             <ListItemIcon>
-              <BeenhereIcon />
+              <SendIcon />
             </ListItemIcon>
             <ListItemText primary="Hợp đồng gửi" className={classes.title} />
           </ListItem>
         </List>
       </Collapse>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.registerLoan)}
+      >
+        <ListItemIcon>
+          <ListAltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Đăng kí vay vốn" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
+      >
+        <ListItemIcon>
+          <SubjectIcon />
+        </ListItemIcon>
+        <ListItemText primary="Hồ sơ vay vốn" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.borrowProduct)}
+      >
+        <ListItemIcon>
+          <CategoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sản phẩm cho vay" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
+      >
+        <ListItemIcon>
+          <AccountBoxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý người dùng" className={classes.title} />
+      </ListItem>
     </List>
     // </div>
   );
