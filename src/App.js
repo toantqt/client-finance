@@ -7,12 +7,13 @@ function App() {
   return (
     <HashRouter>
       <Route
+        exact
         path="/admin"
         render={() =>
           checkRole("admin") ? <Dashboard /> : <Redirect to="/auth/login" />
         }
       ></Route>
-      <Route path="/auth/login" component={LoginPage}></Route>
+      <Route exact path="/auth/login" component={LoginPage}></Route>
     </HashRouter>
   );
 }
