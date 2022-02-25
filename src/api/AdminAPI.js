@@ -7,10 +7,10 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-// const url = "https://xuan-nong.herokuapp.com/api";
-// const url = "http://45.80.152.231:6699/api";
-const url = "http://localhost:6699/adminAPI";
-const urlUser = "http://localhost:6699/api";
+const url = "https://server-finance.herokuapp.com/adminAPI";
+const url = "https://server-finance.herokuapp.com/api";
+// const url = "http://localhost:6699/adminAPI";
+// const urlUser = "http://localhost:6699/api";
 
 const headers = async () => {
   return { Authorization: `${await getAccessToken()}` };
