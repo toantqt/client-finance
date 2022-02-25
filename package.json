@@ -1,5 +1,6 @@
 {
   "name": "client-finance",
+  "homepage": "https://toantqt.github.io/client-finance/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
