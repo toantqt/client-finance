@@ -8,7 +8,7 @@ export const covertDate = (date) => {
 };
 
 const url = "https://server-finance.herokuapp.com/adminAPI";
-const url = "https://server-finance.herokuapp.com/api";
+const urlUser = "https://server-finance.herokuapp.com/api";
 // const url = "http://localhost:6699/adminAPI";
 // const urlUser = "http://localhost:6699/api";
 
