@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import PublishIcon from "@material-ui/icons/Publish";
 import TableComponent from "../../../../components/Table/Table.component";
-import {
-  getCountUser,
-  getUser,
-  covertDate,
-  searchUser,
-} from "../../../../api/AdminAPI";
+import ModalUploadFileComponent from "../../../../components/Modal/ModalUploadFile.component";
+import { getBorrowProduct, covertDate } from "../../../../api/AdminAPI";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import SearchComponent from "../../../../components/Search/Search.component";
-import AdminSlug from "../../../../resources/AdminSlug";
-import { useHistory } from "react-router-dom";
-export default function UserManager(props) {
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+export default function InterestRateManager(props) {
   const history = useHistory();
   const [user, setUser] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -24,26 +18,13 @@ export default function UserManager(props) {
   const [count, setCount] = useState(0);
   useEffect(async () => {
     props.handleLoading(true);
-    await getCountUser().then((res) => {
-      setCount(res.data);
-    });
-    await getUser(page).then((res) => {
+    await getBorrowProduct(page).then((res) => {
       setUser(res.data);
     });
     props.handleLoading(false);
   }, [reload]);
-
-  useEffect(async () => {
-    props.handleLoading(true);
-    await getUser(page).then((res) => {
-      setUser(res.data);
-      props.handleLoading(false);
-    });
-  }, [page]);
   const columns = [
-    { field: "fullName", headerName: "HỌ VÀ TÊN", width: 200 },
-    { field: "phoneNumber", headerName: "SỐ ĐIỆN THOẠI", width: 200 },
-    { field: "idCard", headerName: "CMND/CCCD", width: 200 },
+    { field: "title", headerName: "Tiêu đề", width: 300 },
     { field: "created", headerName: "NGÀY TẠO", width: 200 },
     {
       field: "action",
@@ -70,21 +51,14 @@ export default function UserManager(props) {
   const rows = user.map((e, index) => {
     return {
       id: index,
-      fullName: e?.fullName,
-      phoneNumber: e?.phoneNumber,
-      idCard: e?.idCard,
+      title: e?.name,
       created: covertDate(e?.createAt),
       action: e,
     };
   });
 
-  const handleClick = () => {};
-
-  const handleClickEdit = (id) => {
-    history.push({
-      pathname: AdminSlug.profileUser,
-      search: `id=${id}`,
-    });
+  const handleClick = () => {
+    setOpenModal(true);
   };
 
   const handleClose = () => {
@@ -99,39 +73,14 @@ export default function UserManager(props) {
     setPage(page);
   };
 
-  const handleSearch = async (search) => {
-    if (search === "" || !search) {
-      setReload(!reload);
-    } else {
-      await searchUser(search).then((res) => {
-        setUser(res.data);
-      });
-    }
+  const handleClickEdit = (id) => {
+    history.push(`/admin/edit-borrow/${id}`);
   };
 
   return (
     <Grid>
       <div className="head-title">
-        <span className="title">QUẢN LÝ NGƯỜI DÙNG: ({count})</span>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<PersonAddIcon />}
-          style={{
-            textTransform: "none",
-            float: "right",
-          }}
-          onClick={handleClick}
-        >
-          Tạo tài khoản
-        </Button>
-      </div>
-      <div className="mt-2">
-        <SearchComponent
-          title="Tìm kiếm theo số điện thoại"
-          handleSearch={handleSearch}
-        />
+        <span className="title">QUẢN LÝ LÃI SUẤT:</span>
       </div>
 
       <div className="mt-3">
@@ -143,6 +92,13 @@ export default function UserManager(props) {
           handleChangePage={handleChangePage}
         />
       </div>
+      <ModalUploadFileComponent
+        open={openModal}
+        handleClose={handleClose}
+        handleLoading={props.handleLoading}
+        handleReload={handleReload}
+        status="sending"
+      />
     </Grid>
   );
 }

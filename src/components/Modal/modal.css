@@ -14,3 +14,7 @@
 .btn-add:hover {
   background-color: #303f9f !important;
 }
+
+.wrap-modal .MuiDialog-paperWidthSm{
+  width: 500px !important;
+}

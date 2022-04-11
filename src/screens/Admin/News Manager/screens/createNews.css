@@ -1,0 +1,54 @@
+.create-news {
+  width: 100%;
+}
+
+.editor-class {
+  max-height: 400px;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.toolbar-class {
+  border: 1px solid #ccc;
+}
+
+.news-title p {
+  margin-bottom: 5px !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+.news-editor p {
+  margin-bottom: 5px !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+.news-image p {
+  margin-bottom: 5px !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wrap-pick-image {
+  width: 100;
+  height: 170px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.04);
+  overflow: auto;
+}
+
+.wrapper-class {
+  padding: 9px !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border-radius: 6px;
+}
+
+.button-add {
+  width: 100%;
+}
+.button-add button {
+  float: right;
+  padding: 9px !important;
+  font-weight: 500;
+}

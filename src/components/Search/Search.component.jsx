@@ -45,7 +45,7 @@ export default function SearchComponent(props) {
     >
       <InputBase
         className={classes.input}
-        placeholder="Tìm kiếm"
+        placeholder={props?.title}
         onChange={handleChange}
       />
       <IconButton

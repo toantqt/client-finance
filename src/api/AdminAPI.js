@@ -7,10 +7,10 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://server-finance.herokuapp.com/adminAPI";
-const urlUser = "https://server-finance.herokuapp.com/api";
-// const url = "http://localhost:6699/adminAPI";
-// const urlUser = "http://localhost:6699/api";
+// const url = "https://server-finance.herokuapp.com/adminAPI";
+// const urlUser = "https://server-finance.herokuapp.com/api";
+const url = "http://localhost:6699/adminAPI";
+const urlUser = "http://localhost:6699/api";
 
 const headers = async () => {
   return { Authorization: `${await getAccessToken()}` };
@@ -182,9 +182,48 @@ export const getCountUser = async () => {
     });
 };
 
+export const searchUser = async (phone) => {
+  return await axios
+    .get(`${url}/search-user/${phone}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const profileUser = async (id) => {
+  return await axios
+    .get(`${urlUser}/profile/${id}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const getUser = async (page) => {
   return await axios
     .get(`${url}/user/${page}`, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const resetPassword = async (data) => {
+  return await axios
+    .post(`${url}/reset-password`, data, {
       headers: await headers(),
     })
     .then(async (res) => {
@@ -378,6 +417,8 @@ export const deleteSubCategory = async (data) => {
       return error.response;
     });
 };
+
+//console.log(updateSubCategory)
 
 export const updateSubCategory = async (data) => {
   return await axios
@@ -795,11 +836,8 @@ export const addNews = async (data) => {
 
   formData.append("thumbnail", data.thumbnail.file);
 
-  formData.append("categoryID", data.categoryID);
-  formData.append("subCategoryID", data.subCategoryID);
   formData.append("title", data.mainTitle);
   formData.append("listsContent", JSON.stringify(data.listsContent));
-  formData.append("author", data.author);
   formData.append("totalContent", data.totalContent);
 
   return await axios
@@ -849,141 +887,41 @@ export const addBanner = async (data) => {
     });
 };
 
-export const addContact = async (data) => {
-  const formData = new FormData();
-
-  if (data.image.file) {
-    formData.append("image", data.image.file);
-  }
-  formData.append("name", data.name);
-  formData.append("address", data.address);
-  formData.append("phoneNumber", data.phoneNumber);
-  formData.append("email", data.email);
-  formData.append("type", data.type);
-
+export const getBorrowProduct = async () => {
   return await axios
-    .post(`${url}/add-contact`, formData, {
+    .get(`${urlUser}/get-borrow-product`, {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
 
-export const deleteContact = async (data) => {
+export const getDetailsBorrowProduct = async (id) => {
   return await axios
-    .post(`${url}/delete-contact`, data, {
+    .get(`${urlUser}/get-details-borrow-product/${id}`, {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
 
-export const getDealer = async (status) => {
+export const updateBorrow = async (id, data) => {
   return await axios
-    .get(`${url}/get-dealer/${status}`, {
+    .post(`${url}/update-borrow/${id}`, data, {
       headers: await headers(),
     })
     .then((res) => {
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const addDealer = async (data) => {
-  return await axios
-    .post(`${url}/register-dealer`, data, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const deleteDealer = async (data) => {
-  return await axios
-    .post(`${url}/delete-dealer`, data, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const getDetailsDealer = async (id) => {
-  return await axios
-    .get(`${url}/get-details-dealer/${id}`, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const updateDealer = async (data) => {
-  return await axios
-    .post(`${url}/update-dealer`, data, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const getContactCustomer = async () => {
-  return await axios
-    .get(`${url}/get-contact-customer`, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
-export const deleteContactCustomer = async (data) => {
-  return await axios
-    .post(`${url}/delete-contact-customer`, data, {
-      headers: await headers(),
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };

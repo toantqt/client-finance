@@ -17,6 +17,9 @@ import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import SubjectIcon from "@material-ui/icons/Subject";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
+import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import "./sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -75,6 +78,15 @@ export default function SideBarComponent(props) {
     //     <img src={logo} alt="" width="100%" />
     //   </div>
     <List style={{ padding: "0px !important" }} className="sidebar">
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.registerLoan)}
+      >
+        <ListItemIcon>
+          <ListAltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Đăng kí vay vốn" className={classes.title} />
+      </ListItem>
       <ListItem button onClick={handleClick3}>
         <ListItemIcon>
           <FindInPageIcon />
@@ -110,25 +122,14 @@ export default function SideBarComponent(props) {
           </ListItem>
         </List>
       </Collapse>
-
-      <ListItem
-        button
-        onClick={() => handleClickSlugLibrary(AdminSlug.registerLoan)}
-      >
-        <ListItemIcon>
-          <ListAltIcon />
-        </ListItemIcon>
-        <ListItemText primary="Đăng kí vay vốn" className={classes.title} />
-      </ListItem>
-
       <ListItem
         button
         onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
       >
         <ListItemIcon>
-          <SubjectIcon />
+          <CardGiftcardIcon />
         </ListItemIcon>
-        <ListItemText primary="Hồ sơ vay vốn" className={classes.title} />
+        <ListItemText primary="Gói ưu đãi" className={classes.title} />
       </ListItem>
 
       <ListItem
@@ -138,9 +139,26 @@ export default function SideBarComponent(props) {
         <ListItemIcon>
           <CategoryIcon />
         </ListItemIcon>
-        <ListItemText primary="Sản phẩm cho vay" className={classes.title} />
+        <ListItemText primary="Cho vay" className={classes.title} />
       </ListItem>
-
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.interestRateManager)}
+      >
+        <ListItemIcon>
+          <TrendingUpIcon />
+        </ListItemIcon>
+        <ListItemText primary="Lãi suất" className={classes.title} />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
+      >
+        <ListItemIcon>
+          <SubjectIcon />
+        </ListItemIcon>
+        <ListItemText primary="Hồ sơ vay vốn" className={classes.title} />
+      </ListItem>
       <ListItem
         button
         onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
@@ -149,6 +167,16 @@ export default function SideBarComponent(props) {
           <AccountBoxIcon />
         </ListItemIcon>
         <ListItemText primary="Quản lý người dùng" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
+      >
+        <ListItemIcon>
+          <NotificationsActiveIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý thông báo" className={classes.title} />
       </ListItem>
     </List>
     // </div>
