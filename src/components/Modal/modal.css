@@ -18,3 +18,12 @@
 .wrap-modal .MuiDialog-paperWidthSm{
   width: 500px !important;
 }
+
+.content-modal-password span{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.content-modal-password span:last-child{
+  color: red
+}

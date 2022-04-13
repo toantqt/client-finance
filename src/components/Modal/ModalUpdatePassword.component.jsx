@@ -30,15 +30,13 @@ export default function ModalUpdatePassword(props) {
       >
         <DialogTitle id="alert-dialog-title">Cập nhật mật khẩu mới</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <TextField
-              id="outlined-basic"
-              label="Mật khẩu mới"
-              variant="outlined"
-              style={{ width: "100%" }}
-              onChange={handleChange}
-            />
-          </DialogContentText>
+          <div className="content-modal-password">
+            <span>Tên đăng nhập:</span> <span> {props?.username} </span>
+          </div>
+          <div className="mt-2 content-modal-password">
+            <span>Mật khẩu mới: </span>
+            <span> {props?.password} </span>
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={props?.handleClose} className="btn-close">

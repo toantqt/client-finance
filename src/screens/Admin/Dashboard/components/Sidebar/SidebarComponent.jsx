@@ -87,6 +87,15 @@ export default function SideBarComponent(props) {
         </ListItemIcon>
         <ListItemText primary="Đăng kí vay vốn" className={classes.title} />
       </ListItem>
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
+      >
+        <ListItemIcon>
+          <SubjectIcon />
+        </ListItemIcon>
+        <ListItemText primary="Hồ sơ vay vốn" className={classes.title} />
+      </ListItem>
       <ListItem button onClick={handleClick3}>
         <ListItemIcon>
           <FindInPageIcon />
@@ -124,7 +133,7 @@ export default function SideBarComponent(props) {
       </Collapse>
       <ListItem
         button
-        onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
+        onClick={() => handleClickSlugLibrary(AdminSlug.voucherManager)}
       >
         <ListItemIcon>
           <CardGiftcardIcon />
@@ -148,17 +157,9 @@ export default function SideBarComponent(props) {
         <ListItemIcon>
           <TrendingUpIcon />
         </ListItemIcon>
-        <ListItemText primary="Lãi suất" className={classes.title} />
+        <ListItemText primary="Biểu lãi suất" className={classes.title} />
       </ListItem>
-      <ListItem
-        button
-        onClick={() => handleClickSlugLibrary(AdminSlug.loanBrief)}
-      >
-        <ListItemIcon>
-          <SubjectIcon />
-        </ListItemIcon>
-        <ListItemText primary="Hồ sơ vay vốn" className={classes.title} />
-      </ListItem>
+
       <ListItem
         button
         onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
@@ -171,7 +172,7 @@ export default function SideBarComponent(props) {
 
       <ListItem
         button
-        onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
+        onClick={() => handleClickSlugLibrary(AdminSlug.notification)}
       >
         <ListItemIcon>
           <NotificationsActiveIcon />

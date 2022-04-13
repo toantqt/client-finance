@@ -10,6 +10,8 @@ import {
   profileUser,
   covertDate,
   resetPassword,
+  updateProfile,
+  randomPassword,
 } from "../../../../api/AdminAPI";
 import "./user.css";
 import ModalUpdatePassword from "../../../../components/Modal/ModalUpdatePassword.component";
@@ -20,32 +22,64 @@ export default function ProfileUser(props) {
   const [data, setData] = useState();
   const [showModalPass, setShowModalPass] = useState(false);
   const [reload, setReload] = useState(false);
+  const [dataUser, setDataUser] = useState({
+    phoneNumber: "",
+    idCard: "",
+    sendingContractID: "",
+    loanContractID: "",
+  });
+  const [password, setPassword] = useState("");
 
   useEffect(async () => {
     props.handleLoading(true);
     if (id) {
       await profileUser(id).then((res) => {
         setData(res.data);
+        setDataUser({
+          phoneNumber: res.data.phoneNumber,
+          idCard: res.data.idCard,
+          sendingContractID: res.data.sendingContractID,
+          loanContractID: res.data.loanContractID,
+        });
       });
       props.handleLoading(false);
     }
   }, [id, reload]);
   const handleClickPass = () => {
+    setPassword(randomPassword(6));
     setShowModalPass(true);
   };
   const handleClosePass = () => {
     setShowModalPass(false);
   };
-  const handleUpdatePass = async (pass) => {
-    if (pass === "" || !pass) {
+  const handleUpdatePass = async () => {
+    if (password === "" || !password) {
       alert("Xin vui lòng nhập mật khẩu");
     } else {
       const data = {
-        password: pass,
+        password: password,
         userID: id,
       };
       await resetPassword(data).then((res) => {
         setShowModalPass(false);
+        setReload(!reload);
+      });
+    }
+  };
+
+  const handleChangeInput = (event) => {
+    let { name, value } = event.target;
+    setDataUser((dataUser) => ({ ...dataUser, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    if (dataUser.phoneNumber === "" || !dataUser.phoneNumber) {
+      alert("Số điện thoại không được để trống");
+    } else if (dataUser.idCard === "" || !dataUser.idCard) {
+      alert("CCCD không được để trống");
+    } else {
+      props.handleLoading(true);
+      await updateProfile(id, dataUser).then((res) => {
         setReload(!reload);
       });
     }
@@ -89,6 +123,7 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.fullName}
                   key={data?.fullName}
+                  disabled
                 />
               </Grid>
               <Grid item lg={6}>
@@ -99,6 +134,8 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.phoneNumber}
                   key={data?.phoneNumber}
+                  name="phoneNumber"
+                  onChange={handleChangeInput}
                 />
               </Grid>
               <Grid item lg={6}>
@@ -109,6 +146,8 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.idCard}
                   key={data?.idCard}
+                  name="idCard"
+                  onChange={handleChangeInput}
                 />
               </Grid>
               <Grid item lg={6}>
@@ -119,6 +158,7 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={covertDate(data?.birthday)}
                   key={data?.birthday}
+                  disabled
                 />
               </Grid>
 
@@ -130,6 +170,7 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.username}
                   key={data?.username}
+                  disabled
                 />
               </Grid>
               <Grid item lg={6}>
@@ -140,6 +181,7 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.profile?.address}
                   key={data?.profile?.address}
+                  disabled
                 />
               </Grid>
               <Grid item lg={6}>
@@ -150,6 +192,8 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.loanContractID}
                   key={data?.loanContractID}
+                  name="loanContractID"
+                  onChange={handleChangeInput}
                 />
               </Grid>
               <Grid item lg={6}>
@@ -160,6 +204,8 @@ export default function ProfileUser(props) {
                   style={{ width: "100%" }}
                   defaultValue={data?.sendingContractID}
                   key={data?.sendingContractID}
+                  name="sendingContractID"
+                  onChange={handleChangeInput}
                 />
               </Grid>
               <Grid item lg={12} style={{ marginTop: "20px", width: "100%" }}>
@@ -169,7 +215,7 @@ export default function ProfileUser(props) {
                   size="large"
                   startIcon={<SaveIcon />}
                   style={{ float: "right " }}
-                  //   onClick={handleSubmit}
+                  onClick={handleSubmit}
                 >
                   Cập nhật
                 </Button>
@@ -182,6 +228,8 @@ export default function ProfileUser(props) {
         open={showModalPass}
         handleClose={handleClosePass}
         handleUpdatePass={handleUpdatePass}
+        password={password}
+        username={data?.username}
       />
     </Grid>
   );

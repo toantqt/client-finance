@@ -4,15 +4,44 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: [
-        "https://codelearn.io/Upload/Blog/react-js-co-ban-phan-1-63738082145.3856.jpg",
-      ],
+      arr: [{ name: "toan" }, { name: "nga" }],
+      index: "",
     };
   }
+  show = (data) => {
+    return data.map((e, index) => {
+      return (
+        <div>
+          <span
+            onClick={() => {
+              this.handleClick(index);
+            }}
+          >
+            {e.name}
+          </span>
+        </div>
+      );
+    });
+  };
+  handleClick = (index) => {
+    this.setState({
+      index: index,
+    });
+  };
+
+  handleChange = (event) => {
+    let name = event.target.value;
+    console.log(name);
+  };
   render() {
     return (
       <div>
-        <img src={this.state.image[0]} alt="" />
+        {this.show(this.state.arr)}
+        <input
+          type="text"
+          onChange={this.handleChange}
+          defaultValue={this.state.arr[this.state.index]?.name}
+        ></input>
       </div>
     );
   }

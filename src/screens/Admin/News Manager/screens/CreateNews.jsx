@@ -12,13 +12,19 @@ import ImagePreivewsComponent from "../../../../components/Image Previews/ImageP
 import AdminSlug from "../../../../resources/AdminSlug";
 export default function CreateNews(props) {
   const history = useHistory();
+  const query = queryString.parse(props.location.search);
+  const id = query.id;
   const [count, setCount] = useState(1);
   const [image, setImage] = useState([]);
   const [content, setContent] = useState([]);
   const [title, setTitle] = useState("");
   const [thumbnail, setThumnail] = useState();
 
-  useEffect(async () => {}, []);
+  useEffect(async () => {
+    if (id) {
+      props.handleLoading(false);
+    }
+  }, [id]);
 
   const handleClickCount = () => {
     const newCount = count + 1;
@@ -46,6 +52,7 @@ export default function CreateNews(props) {
 
   const handleClickCreateNews = async () => {
     const data = {
+      categoryID: id,
       mainTitle: title,
       listsContent: content,
       listImage: image,
@@ -55,18 +62,18 @@ export default function CreateNews(props) {
 
     console.log(data);
 
-    // if (data.mainTitle === "") {
-    //   alert("Xin vui lòng thêm tiêu đề!");
-    // } else {
-    //   props.handleLoading(true);
-    //   await addNews(data).then((res) => {
-    //     props.handleLoading(false);
-    //     history.push({
-    //       pathname: AdminSlug.newsManager,
-    //       // search: `?q=${slug}`,
-    //     });
-    //   });
-    // }
+    if (data.mainTitle === "") {
+      alert("Xin vui lòng thêm tiêu đề!");
+    } else {
+      props.handleLoading(true);
+      await addNews(data).then((res) => {
+        props.handleLoading(false);
+        history.push({
+          pathname: AdminSlug.newsManager,
+          search: `?id=${id}`,
+        });
+      });
+    }
   };
 
   const handleChangeThumbnail = (event) => {

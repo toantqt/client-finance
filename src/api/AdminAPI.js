@@ -7,6 +7,16 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
+export const randomPassword = (length) => {
+  var result = "";
+  var characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 // const url = "https://server-finance.herokuapp.com/adminAPI";
 // const urlUser = "https://server-finance.herokuapp.com/api";
 const url = "http://localhost:6699/adminAPI";
@@ -224,6 +234,32 @@ export const getUser = async (page) => {
 export const resetPassword = async (data) => {
   return await axios
     .post(`${url}/reset-password`, data, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateProfile = async (userID, data) => {
+  return await axios
+    .post(`${url}/update-profile/${userID}`, data, {
+      headers: await headers(),
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const createUser = async (data) => {
+  return await axios
+    .post(`${url}/create-user`, data, {
       headers: await headers(),
     })
     .then(async (res) => {
@@ -835,11 +871,10 @@ export const addNews = async (data) => {
   }
 
   formData.append("thumbnail", data.thumbnail.file);
-
+  formData.append("categoryID", data.categoryID);
   formData.append("title", data.mainTitle);
   formData.append("listsContent", JSON.stringify(data.listsContent));
   formData.append("totalContent", data.totalContent);
-
   return await axios
     .post(`${url}/add-news`, formData, {
       headers: await headers(),
@@ -916,6 +951,136 @@ export const getDetailsBorrowProduct = async (id) => {
 export const updateBorrow = async (id, data) => {
   return await axios
     .post(`${url}/update-borrow/${id}`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const countNotification = async () => {
+  return await axios
+    .get(`${url}/count-notification`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getNotification = async (page) => {
+  return await axios
+    .get(`${url}/notification/${page}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const createNotification = async (data) => {
+  return await axios
+    .post(`${url}/notification`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getCategoryVoucher = async () => {
+  return await axios
+    .get(`${urlUser}/get-voucher`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getDetailsVoucher = async (id) => {
+  return await axios
+    .get(`${urlUser}/get-details-voucher/${id}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getListsNews = async (id) => {
+  return await axios
+    .get(`${urlUser}/lists-news-voucher/${id}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getAllNews = async () => {
+  return await axios
+    .get(`${url}/lists-news`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getInterestRate = async () => {
+  return await axios
+    .get(`${urlUser}/interest-rate`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const addInterestRate = async (data) => {
+  return await axios
+    .post(`${url}/interest-rate`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const deleteInterestRate = async (id) => {
+  return await axios
+    .delete(`${url}/delete-interest-rate/${id}`, {
       headers: await headers(),
     })
     .then((res) => {

@@ -5,8 +5,13 @@ export default {
   loanBrief: "/admin/loan-brief",
   borrowProduct: "/admin/borrow-product",
   editBorrow: "/admin/edit-borrow/:id",
+  newsManager: "/admin/news-manager",
   addNews: "/admin/add-news",
   interestRateManager: "/admin/interest-rate",
   userManager: "/admin/user-manager",
   profileUser: "/admin/profile-user",
+  createUser: "/admin/create-user",
+  notification: "/admin/notification",
+  createNotificationAll: "/admin/notification-all",
+  voucherManager: "/admin/voucher-manager",
 };

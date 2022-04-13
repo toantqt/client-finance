@@ -6,10 +6,15 @@ import InterestRateManager from "../screens/Admin/Interest Rate/screens/Interest
 import LoanBriefManager from "../screens/Admin/Loan Brief/screens/LoanBriefManager";
 import LoanContractManager from "../screens/Admin/Loan Contract/screens/Loan Contract Manager/LoanContractManager";
 import CreateNews from "../screens/Admin/News Manager/screens/CreateNews";
+import NewsManager from "../screens/Admin/News Manager/screens/NewsManager";
+import CreateNotificationAll from "../screens/Admin/Notification/screens/CreateNotificationAll";
+import Notifcation from "../screens/Admin/Notification/screens/Notification";
 import RegisterLoanManager from "../screens/Admin/Register Loan/screens/RegisterLoanManager";
 import SendingContractManager from "../screens/Admin/Sending Contract/screens/SendingContractManager";
+import CreateUser from "../screens/Admin/User/screens/CreateUser";
 import ProfileUser from "../screens/Admin/User/screens/ProfileUser";
 import UserManager from "../screens/Admin/User/screens/UserManager";
+import Voucher from "../screens/Admin/Voucher/screens/Voucher";
 
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
@@ -26,7 +31,6 @@ const AdminRoutes = (props) => {
           path={adminSlug.sendingContract}
           render={() => <SendingContractManager {...props} />}
         ></Route>
-
         <Route
           exact
           path={adminSlug.registerLoan}
@@ -44,19 +48,24 @@ const AdminRoutes = (props) => {
             <ProfileUser {...props} handleLoading={handleLoading} />
           )}
         ></Route>
+        <Route
+          exact
+          path={adminSlug.createUser}
+          render={(props) => (
+            <CreateUser {...props} handleLoading={handleLoading} />
+          )}
+        ></Route>
 
         <Route
           exact
           path={adminSlug.loanBrief}
           render={() => <LoanBriefManager {...props} />}
         ></Route>
-
         <Route
           exact
           path={adminSlug.borrowProduct}
           render={() => <BorrowProductManager {...props} />}
         ></Route>
-
         <Route
           exact
           path={adminSlug.editBorrow}
@@ -64,7 +73,6 @@ const AdminRoutes = (props) => {
             <EditBorow handleLoading={handleLoading} {...props} />
           )}
         ></Route>
-
         <Route
           exact
           path={adminSlug.addNews}
@@ -72,12 +80,42 @@ const AdminRoutes = (props) => {
             <CreateNews handleLoading={handleLoading} {...props} />
           )}
         ></Route>
-
+        <Route
+          exact
+          path={adminSlug.newsManager}
+          render={(props) => (
+            <NewsManager handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
         <Route
           exact
           path={adminSlug.interestRateManager}
           render={(props) => (
             <InterestRateManager handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.notification}
+          render={(props) => (
+            <Notifcation handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.createNotificationAll}
+          render={(props) => (
+            <CreateNotificationAll handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.voucherManager}
+          render={(props) => (
+            <Voucher handleLoading={handleLoading} {...props} />
           )}
         ></Route>
       </Switch>

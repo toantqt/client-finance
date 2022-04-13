@@ -15,6 +15,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SearchComponent from "../../../../components/Search/Search.component";
 import AdminSlug from "../../../../resources/AdminSlug";
 import { useHistory } from "react-router-dom";
+import AddAlertIcon from "@material-ui/icons/AddAlert";
 export default function UserManager(props) {
   const history = useHistory();
   const [user, setUser] = useState([]);
@@ -61,6 +62,16 @@ export default function UserManager(props) {
             >
               <EditIcon />
             </IconButton>
+
+            <IconButton
+              aria-label="noti"
+              className="btn-action btn-a-2"
+              onClick={() => {
+                handleClickNoti(action.row?.action?._id);
+              }}
+            >
+              <AddAlertIcon style={{ color: "orange" }} />
+            </IconButton>
           </>
         );
       },
@@ -78,7 +89,16 @@ export default function UserManager(props) {
     };
   });
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    history.push(AdminSlug.createUser);
+  };
+
+  const handleClickNoti = (id) => {
+    history.push({
+      pathname: AdminSlug.createNotificationAll,
+      search: `?id=${id}`,
+    });
+  };
 
   const handleClickEdit = (id) => {
     history.push({
