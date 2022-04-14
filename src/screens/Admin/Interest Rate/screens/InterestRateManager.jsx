@@ -10,6 +10,7 @@ import {
   covertDate,
   addInterestRate,
   deleteInterestRate,
+  updateInterestRate,
 } from "../../../../api/AdminAPI";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
@@ -17,6 +18,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddIcon from "@material-ui/icons/Add";
 import ModalAddInterestRate from "../../../../components/Modal/ModalAddInterestRate";
 import ModalDeleteComponent from "../../../../components/Modal/ModelDelete.component";
+import ModalUpdateInterestRate from "../../../../components/Modal/ModalUpdateInterestRate";
 
 export default function InterestRateManager(props) {
   const history = useHistory();
@@ -26,7 +28,9 @@ export default function InterestRateManager(props) {
   const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [deleteID, setDeleteID] = useState();
+  const [dataUpdate, setDataUpdate] = useState();
   useEffect(async () => {
     props.handleLoading(true);
     await getInterestRate(page).then((res) => {
@@ -49,7 +53,7 @@ export default function InterestRateManager(props) {
               aria-label="delete"
               className="btn-action btn-a-2"
               onClick={() => {
-                handleClickEdit(action.row?.action?._id);
+                handleClickEdit(action.row?.action);
               }}
             >
               <EditIcon />
@@ -117,8 +121,9 @@ export default function InterestRateManager(props) {
     }
   };
 
-  const handleClickEdit = (id) => {
-    history.push(`/admin/edit-borrow/${id}`);
+  const handleClickEdit = (data) => {
+    setDataUpdate(data);
+    setOpenModalUpdate(true);
   };
 
   const handleCloseModalDelete = () => {
@@ -134,6 +139,32 @@ export default function InterestRateManager(props) {
         setReload(!reload);
       });
     }
+  };
+
+  const handleChangeUpdate = (name, value) => {
+    setDataUpdate((dataUpdate) => ({ ...dataUpdate, [name]: value }));
+  };
+
+  const handleUpdate = async () => {
+    if (
+      !dataUpdate.time ||
+      dataUpdate.time === "" ||
+      !dataUpdate.interestRate ||
+      dataUpdate.interestRate === ""
+    ) {
+      alert("Xin vui lòng điền đầy đủ thông tin");
+    } else {
+      props.handleLoading(true);
+      await updateInterestRate(dataUpdate).then((res) => {
+        handleCloseModalUpdate();
+        setReload(!reload);
+      });
+    }
+  };
+
+  const handleCloseModalUpdate = () => {
+    setDataUpdate();
+    setOpenModalUpdate(false);
   };
 
   return (
@@ -173,6 +204,12 @@ export default function InterestRateManager(props) {
         title="Xác nhận xóa lãi suất"
         handleClose={handleCloseModalDelete}
         handleDelete={handleDelete}
+      />
+      <ModalUpdateInterestRate
+        open={openModalUpdate}
+        data={dataUpdate}
+        handleChangeUpdate={handleChangeUpdate}
+        handleUpdate={handleUpdate}
       />
     </Grid>
   );

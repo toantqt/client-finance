@@ -1090,3 +1090,16 @@ export const deleteInterestRate = async (id) => {
       return error.response;
     });
 };
+
+export const updateInterestRate = async (data) => {
+  return await axios
+    .post(`${url}/update-interest-rate/${data._id}`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
