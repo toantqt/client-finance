@@ -17,10 +17,10 @@ export const randomPassword = (length) => {
   return result;
 };
 
-// const url = "https://server-finance.herokuapp.com/adminAPI";
-// const urlUser = "https://server-finance.herokuapp.com/api";
-const url = "http://localhost:6699/adminAPI";
-const urlUser = "http://localhost:6699/api";
+const url = "https://server-finance.herokuapp.com/adminAPI";
+const urlUser = "https://server-finance.herokuapp.com/api";
+// const url = "http://localhost:6699/adminAPI";
+// const urlUser = "http://localhost:6699/api";
 
 const headers = async () => {
   return { Authorization: `${await getAccessToken()}` };
