@@ -36,22 +36,61 @@ export default function Notifcation(props) {
   };
 
   const columns = [
-    { field: "receiverID", headerName: "NGƯỜI NHẬN", width: 200 },
-    { field: "type", headerName: "LOẠI THÔNG BÁO", width: 200 },
+    {
+      field: "receiverID",
+      headerName: "NGƯỜI NHẬN",
+      width: 200,
+      renderCell: (action) => {
+        console.log(action.row.receiverID);
+        if (action.row?.receiverID == "Tất cả") {
+          return <span className="title-all">Tất cả</span>;
+        } else {
+          return (
+            <span className="title-fullName">
+              {action.row?.receiverID?.fullName}
+            </span>
+          );
+        }
+      },
+    },
+    {
+      field: "type",
+      headerName: "LOẠI",
+      width: 100,
+      renderCell: (action) => {
+        if (action.row?.type == "1") {
+          return <span className="title-type1">Thông báo</span>;
+        } else {
+          return <span className="title-type2">Ưu đãi</span>;
+        }
+      },
+    },
     { field: "title", headerName: "TIÊU ĐỀ", width: 200 },
-    { field: "newsID", headerName: "BÀI VIẾT", width: 200 },
+    {
+      field: "newsID",
+      headerName: "BÀI VIẾT",
+      width: 300,
+      renderCell: (action) => {
+        return (
+          <span title={action.row?.newsID?.title}>
+            {action.row?.newsID?.title}
+          </span>
+        );
+      },
+    },
     { field: "content", headerName: "NỘI DUNG", width: 200 },
     { field: "created", headerName: "NGÀY TẠO", width: 200 },
   ];
 
   const rows = data.map((e, index) => {
+    console.log(e);
     return {
       id: index,
-      receiverID: e.receiverID,
-      type: e.type,
-      title: e.title,
-      newsID: e.newsID,
-      content: e.content,
+      receiverID: e?.profile,
+      type: e?.notification?.type,
+      title: e?.notification?.title,
+      newsID: e?.news,
+      content: e?.notification?.content,
       created: covertDate(e.created),
     };
   });

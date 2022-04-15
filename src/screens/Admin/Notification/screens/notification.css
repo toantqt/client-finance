@@ -16,3 +16,25 @@
 .news-modal:hover{
     cursor: pointer;
 }
+
+.title-all{
+    color: green !important;
+    font-weight: 500;
+}
+
+.title-fullName{
+    color: blue !important;
+    font-weight: 500;
+
+}
+
+.title-type1{
+    color: orange;
+    font-weight: 500;
+}
+
+.title-type2{
+    color: rgb(173, 22, 47);
+    font-weight: 500;
+
+}

@@ -16,6 +16,7 @@ import AddIcon from "@material-ui/icons/Add";
 import AdminSlug from "../../../../resources/AdminSlug";
 import { useHistory } from "react-router-dom";
 import ModalDeleteComponent from "../../../../components/Modal/ModelDelete.component";
+import ModalNews from "../../../../components/Modal/ModalNews";
 
 export default function NewsManager(props) {
   const history = useHistory();
@@ -28,6 +29,8 @@ export default function NewsManager(props) {
   const [voucher, setVoucher] = useState();
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [deleteID, setDeleteID] = useState();
+  const [dataView, setDataView] = useState();
+  const [showModalNews, setShowModalNews] = useState(false);
   useEffect(async () => {
     props.handleLoading(true);
     if (id) {
@@ -56,13 +59,13 @@ export default function NewsManager(props) {
               aria-label="delete"
               className="btn-action btn-a-1"
               onClick={() => {
-                // handleClickView(action.row?.action?.slug);
+                handleClickView(action.row?.action);
               }}
             >
               <VisibilityIcon />
             </IconButton>
 
-            <IconButton
+            {/* <IconButton
               aria-label="delete"
               className="btn-action btn-a-2"
               onClick={() => {
@@ -70,7 +73,7 @@ export default function NewsManager(props) {
               }}
             >
               <EditIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-3"
@@ -116,6 +119,16 @@ export default function NewsManager(props) {
     setShowModalDelete(false);
   };
 
+  const handleClickView = (data) => {
+    setDataView(data);
+    setShowModalNews(true);
+  };
+
+  const handleCloseModalNews = () => {
+    setShowModalNews(false);
+    setDataView();
+  };
+
   return (
     <Grid>
       <div className="head-title">
@@ -150,6 +163,11 @@ export default function NewsManager(props) {
         open={showModalDelete}
         title="Xác nhận xóa bài viết"
         handleClose={handleCloseModalDelete}
+      />
+      <ModalNews
+        open={showModalNews}
+        data={dataView}
+        handleClose={handleCloseModalNews}
       />
     </Grid>
   );

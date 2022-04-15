@@ -18,6 +18,12 @@
 .wrap-modal .MuiDialog-paperWidthSm{
   width: 500px !important;
 }
+.modal-news .MuiDialog-paperWidthSm{
+  width: 70% !important;
+}
+.modal-news .MuiDialog-paperWidthSm{
+  max-width: none !important
+}
 
 .content-modal-password span{
   font-size: 16px;
