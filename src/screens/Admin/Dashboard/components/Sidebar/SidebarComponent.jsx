@@ -115,7 +115,7 @@ export default function SideBarComponent(props) {
             <ListItemIcon>
               <FeaturedPlayListIcon />
             </ListItemIcon>
-            <ListItemText primary="Hợp đồng vay" className={classes.title} />
+            <ListItemText primary="Vay" className={classes.title} />
           </ListItem>
           <ListItem
             button
@@ -127,7 +127,7 @@ export default function SideBarComponent(props) {
             <ListItemIcon>
               <SendIcon />
             </ListItemIcon>
-            <ListItemText primary="Hợp đồng gửi" className={classes.title} />
+            <ListItemText primary="Tiết kiệm" className={classes.title} />
           </ListItem>
         </List>
       </Collapse>
