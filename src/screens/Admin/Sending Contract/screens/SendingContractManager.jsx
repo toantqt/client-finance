@@ -94,7 +94,7 @@ export default function SendingContractManager(props) {
   return (
     <Grid>
       <div className="head-title">
-        <span className="title">QUẢN LÝ HỢP ĐỒNG GỬI: ({count})</span>
+        <span className="title">QUẢN LÝ TIẾT KIỆM: ({count})</span>
         <Button
           variant="contained"
           color="primary"

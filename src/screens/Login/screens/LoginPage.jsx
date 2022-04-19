@@ -48,7 +48,7 @@ const LoginPage = () => {
         // );
         // localStorage.clear();
         if (res === "admin") {
-          history.push("/admin");
+          history.push("/admin/register-loan");
         } else {
           alert("Bạn không có quyền để truy cập");
           localStorage.clear();

@@ -638,9 +638,9 @@ export const getNewsCategory = async (slug) => {
     });
 };
 
-export const deleteNews = async (data) => {
+export const deleteNews = async (newsID) => {
   return await axios
-    .post(`${url}/delete-news`, data, {
+    .delete(`${url}/delete-news/${newsID}`, {
       headers: await headers(),
     })
     .then(async (res) => {

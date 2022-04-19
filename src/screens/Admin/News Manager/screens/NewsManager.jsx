@@ -4,6 +4,7 @@ import {
   getListsNews,
   covertDate,
   getDetailsVoucher,
+  deleteNews,
 } from "../../../../api/AdminAPI";
 import TableComponent from "../../../../components/Table/Table.component";
 import IconButton from "@material-ui/core/IconButton";
@@ -42,7 +43,7 @@ export default function NewsManager(props) {
       });
       props.handleLoading(false);
     }
-  }, [id]);
+  }, [id, reload]);
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
@@ -129,6 +130,14 @@ export default function NewsManager(props) {
     setDataView();
   };
 
+  const handleConfirmDelete = async () => {
+    props.handleLoading(true);
+    await deleteNews(deleteID).then((res) => {
+      handleCloseModalDelete();
+      setReload(!reload);
+    });
+  };
+
   return (
     <Grid>
       <div className="head-title">
@@ -163,6 +172,7 @@ export default function NewsManager(props) {
         open={showModalDelete}
         title="Xác nhận xóa bài viết"
         handleClose={handleCloseModalDelete}
+        handleDelete={handleConfirmDelete}
       />
       <ModalNews
         open={showModalNews}

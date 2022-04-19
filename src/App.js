@@ -15,7 +15,6 @@ function App() {
         }
       ></Route>
       <Route exact path="/auth/login" component={LoginPage}></Route>
-      <Route exact path="/home" component={Home}></Route>
     </HashRouter>
   );
 }

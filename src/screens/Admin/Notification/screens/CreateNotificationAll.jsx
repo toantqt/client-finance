@@ -80,7 +80,9 @@ export default function CreateNotificationAll(props) {
   return (
     <Grid>
       <div className="head-title">
-        <span className="title">TẠO THÔNG BÁO ĐẾN TẤT CẢ: </span>
+        <span className="title">
+          TẠO THÔNG BÁO ĐẾN {id === "all" ? "TẤT CẢ" : "CÁ NHÂN"}:{" "}
+        </span>
       </div>
       <div className="mt-3">
         <Grid container spacing={2}>

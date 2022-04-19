@@ -91,7 +91,7 @@ export default function LoanContractManager(props) {
   return (
     <Grid>
       <div className="head-title">
-        <span className="title">QUẢN LÝ HỢP ĐỒNG VAY: ({count})</span>
+        <span className="title">QUẢN LÝ VAY: ({count})</span>
         <Button
           variant="contained"
           color="primary"

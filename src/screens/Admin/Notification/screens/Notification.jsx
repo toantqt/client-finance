@@ -91,7 +91,7 @@ export default function Notifcation(props) {
       title: e?.notification?.title,
       newsID: e?.news,
       content: e?.notification?.content,
-      created: covertDate(e.created),
+      created: covertDate(e?.notification?.created),
     };
   });
 
