@@ -60,8 +60,6 @@ export default function CreateNews(props) {
       thumbnail: thumbnail,
     };
 
-    console.log(data);
-
     if (data.mainTitle === "") {
       alert("Xin vui lòng thêm tiêu đề!");
     } else {
@@ -81,7 +79,6 @@ export default function CreateNews(props) {
       let files = Array.from(event.target.files);
       files.forEach((file) => {
         let reader = new FileReader();
-        console.log(reader.result);
         reader.onloadend = () => {
           setThumnail({ url: reader.result, file: file });
         };

@@ -29,7 +29,6 @@ export default function LoanBriefManager(props) {
   useEffect(async () => {
     props.handleLoading(true);
     await getLoanBrief().then((res) => {
-      console.log(res);
       setLoanBrief(res.data);
     });
     props.handleLoading(false);

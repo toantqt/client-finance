@@ -9,7 +9,6 @@ import "./modal.css";
 import TextField from "@material-ui/core/TextField";
 
 export default function ModalNews(props) {
-  console.log(props);
   const listsContent = props?.data?.listContent?.map((e) => {
     return (
       <div>

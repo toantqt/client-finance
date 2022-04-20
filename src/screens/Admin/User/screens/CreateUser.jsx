@@ -50,7 +50,6 @@ export default function CreateUser(props) {
   const handleClickRandomPassword = () => {
     setData((data) => ({ ...data, password: randomPassword(6) }));
   };
-  console.log(data);
   return (
     <Grid>
       <div className="head-title">

@@ -55,7 +55,6 @@ export default function CreateNotificationAll(props) {
       props.handleLoading(true);
       data.type = value;
       data.newsID = dataNews.newsID;
-      console.log(data);
       await createNotification(data).then((res) => {
         history.push(AdminSlug.notification);
       });

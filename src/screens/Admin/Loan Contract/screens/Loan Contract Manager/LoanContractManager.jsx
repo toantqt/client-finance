@@ -42,7 +42,6 @@ export default function LoanContractManager(props) {
   ];
 
   const rows = loan.map((e, index) => {
-    console.log(e);
     return {
       id: index,
       fullName: e?.fullName,
@@ -79,7 +78,6 @@ export default function LoanContractManager(props) {
         search: search,
       };
       await searchLoan(data).then((res) => {
-        console.log(res.data);
         if (res.data) {
           setLoan([res.data]);
         } else {

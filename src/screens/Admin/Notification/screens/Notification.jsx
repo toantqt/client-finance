@@ -41,7 +41,6 @@ export default function Notifcation(props) {
       headerName: "NGƯỜI NHẬN",
       width: 200,
       renderCell: (action) => {
-        console.log(action.row.receiverID);
         if (action.row?.receiverID == "Tất cả") {
           return <span className="title-all">Tất cả</span>;
         } else {
@@ -83,7 +82,6 @@ export default function Notifcation(props) {
   ];
 
   const rows = data.map((e, index) => {
-    console.log(e);
     return {
       id: index,
       receiverID: e?.profile,

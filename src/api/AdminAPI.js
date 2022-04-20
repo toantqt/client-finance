@@ -349,17 +349,14 @@ export const getDetailsBanner = async (bannerID) => {
 };
 
 export const deleteBanner = async (data) => {
-  console.log(data);
   return await axios
     .post(`${url}/delete-banner`, data, {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -393,11 +390,9 @@ export const updateBanner = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -454,8 +449,6 @@ export const deleteSubCategory = async (data) => {
     });
 };
 
-//console.log(updateSubCategory)
-
 export const updateSubCategory = async (data) => {
   return await axios
     .post(`${url}/update-sub-category`, data, {
@@ -510,11 +503,9 @@ export const updateImage = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -543,11 +534,9 @@ export const addImage = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -566,11 +555,9 @@ export const addVideo = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -603,11 +590,9 @@ export const updateVideo = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -655,7 +640,6 @@ export const updateIntroduce = async (data) => {
   const formData = new FormData();
   let i = 0;
   for (let item of data.history.image) {
-    console.log(item);
     let title = "lists1Img" + i;
     if (item.file) {
       formData.append(title, item.file);
@@ -730,7 +714,6 @@ export const updateProduct = async (data) => {
       return e.list === i + 1;
     });
     for (let img of arrImg) {
-      console.log(img);
       if (img.image.url) {
         formData.append(title, JSON.stringify(img.image));
       } else {
@@ -763,11 +746,9 @@ export const updateProduct = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -781,7 +762,6 @@ export const updateNews = async (data) => {
       return e.list === i + 1;
     });
     for (let img of arrImg) {
-      console.log(img);
       if (img.image.url) {
         formData.append(title, JSON.stringify(img.image));
       } else {
@@ -807,17 +787,14 @@ export const updateNews = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
 
 export const addProduct = async (data) => {
-  console.log(data);
   const formData = new FormData();
   for (let i = 0; i < data.totalContent; i++) {
     let title = "listsImage" + i;
@@ -847,17 +824,14 @@ export const addProduct = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
 
 export const addNews = async (data) => {
-  console.log(data);
   const formData = new FormData();
 
   for (let i = 0; i < data.totalContent; i++) {
@@ -880,11 +854,9 @@ export const addNews = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };
@@ -913,11 +885,9 @@ export const addBanner = async (data) => {
       headers: await headers(),
     })
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 };

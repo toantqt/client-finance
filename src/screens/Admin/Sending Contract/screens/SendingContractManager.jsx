@@ -46,7 +46,6 @@ export default function SendingContractManager(props) {
   ];
 
   const rows = loan.map((e, index) => {
-    console.log(e);
     return {
       id: index,
       fullName: e?.fullName,
