@@ -1103,3 +1103,29 @@ export const updateInterestRate = async (data) => {
       return error.response;
     });
 };
+
+export const getDeposits = async (type) => {
+  return await axios
+    .get(`${urlUser}/deposits/${type}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateDeposits = async (type, data) => {
+  return await axios
+    .post(`${url}/deposits/${type}`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

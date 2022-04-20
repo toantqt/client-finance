@@ -14,4 +14,6 @@ export default {
   notification: "/admin/notification",
   createNotificationAll: "/admin/notification-all",
   voucherManager: "/admin/voucher-manager",
+  depositsManager: "/admin/deposits-manager",
+  editDeposits: "/admin/edit-deposits/:type",
 };

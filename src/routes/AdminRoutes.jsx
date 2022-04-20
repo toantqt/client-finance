@@ -2,6 +2,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import adminSlug from "../resources/AdminSlug";
 import BorrowProductManager from "../screens/Admin/Borrow Product/screens/BorrowProductManager";
 import EditBorow from "../screens/Admin/Borrow Product/screens/EditBorrow";
+import Deposits from "../screens/Admin/Deposits/screens/Deposits";
+import EditDeposits from "../screens/Admin/Deposits/screens/EditDeposits";
 import InterestRateManager from "../screens/Admin/Interest Rate/screens/InterestRateManager";
 import LoanBriefManager from "../screens/Admin/Loan Brief/screens/LoanBriefManager";
 import LoanContractManager from "../screens/Admin/Loan Contract/screens/Loan Contract Manager/LoanContractManager";
@@ -116,6 +118,22 @@ const AdminRoutes = (props) => {
           path={adminSlug.voucherManager}
           render={(props) => (
             <Voucher handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.depositsManager}
+          render={(props) => (
+            <Deposits handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.editDeposits}
+          render={(props) => (
+            <EditDeposits handleLoading={handleLoading} {...props} />
           )}
         ></Route>
       </Switch>

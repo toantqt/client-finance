@@ -20,6 +20,7 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import "./sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -149,6 +150,16 @@ export default function SideBarComponent(props) {
           <CategoryIcon />
         </ListItemIcon>
         <ListItemText primary="Cho vay" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary(AdminSlug.depositsManager)}
+      >
+        <ListItemIcon>
+          <AccountBalanceWalletIcon />
+        </ListItemIcon>
+        <ListItemText primary="Tiền gửi" className={classes.title} />
       </ListItem>
       <ListItem
         button
