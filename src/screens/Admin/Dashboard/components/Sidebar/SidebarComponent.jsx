@@ -21,6 +21,7 @@ import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import "./sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -173,6 +174,16 @@ export default function SideBarComponent(props) {
 
       <ListItem
         button
+        onClick={() => handleClickSlugLibrary(AdminSlug.notification)}
+      >
+        <ListItemIcon>
+          <NotificationsActiveIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý thông báo" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
         onClick={() => handleClickSlugLibrary(AdminSlug.userManager)}
       >
         <ListItemIcon>
@@ -183,12 +194,12 @@ export default function SideBarComponent(props) {
 
       <ListItem
         button
-        onClick={() => handleClickSlugLibrary(AdminSlug.notification)}
+        onClick={() => handleClickSlugLibrary(AdminSlug.contactManager)}
       >
         <ListItemIcon>
-          <NotificationsActiveIcon />
+          <ContactPhoneIcon />
         </ListItemIcon>
-        <ListItemText primary="Quản lý thông báo" className={classes.title} />
+        <ListItemText primary="Quản lý liên hệ" className={classes.title} />
       </ListItem>
     </List>
     // </div>

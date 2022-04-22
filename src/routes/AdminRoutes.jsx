@@ -2,6 +2,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import adminSlug from "../resources/AdminSlug";
 import BorrowProductManager from "../screens/Admin/Borrow Product/screens/BorrowProductManager";
 import EditBorow from "../screens/Admin/Borrow Product/screens/EditBorrow";
+import ContactManager from "../screens/Admin/Contact Manager/screens/ContactManager";
+import CreateContact from "../screens/Admin/Contact Manager/screens/CreateContact";
+import EditContact from "../screens/Admin/Contact Manager/screens/EditContact";
 import Deposits from "../screens/Admin/Deposits/screens/Deposits";
 import EditDeposits from "../screens/Admin/Deposits/screens/EditDeposits";
 import InterestRateManager from "../screens/Admin/Interest Rate/screens/InterestRateManager";
@@ -134,6 +137,30 @@ const AdminRoutes = (props) => {
           path={adminSlug.editDeposits}
           render={(props) => (
             <EditDeposits handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.contactManager}
+          render={(props) => (
+            <ContactManager handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.createContact}
+          render={(props) => (
+            <CreateContact handleLoading={handleLoading} {...props} />
+          )}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.editContact}
+          render={(props) => (
+            <EditContact handleLoading={handleLoading} {...props} />
           )}
         ></Route>
       </Switch>

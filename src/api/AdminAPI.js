@@ -1099,3 +1099,75 @@ export const updateDeposits = async (type, data) => {
       return error.response;
     });
 };
+
+export const getListsContact = async () => {
+  return await axios
+    .get(`${urlUser}/lists-contact`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const createContact = async (data, image) => {
+  const formData = new FormData();
+  formData.append("image", image.file);
+  formData.append("phoneNumber", data.phoneNumber);
+  formData.append("position", data.position);
+  formData.append("fullName", data.fullName);
+  formData.append("workAddress", data.workAddress);
+
+  return await axios
+    .post(`${url}/contact`, formData, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const deleteContact = async (id) => {
+  return await axios
+    .delete(`${url}/contact/${id}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const searchContact = async (phoneNumber) => {
+  return await axios
+    .get(`${url}/search-contact/${phoneNumber}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getDetailsContact = async (id) => {
+  return await axios
+    .get(`${url}/contact/${id}`, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

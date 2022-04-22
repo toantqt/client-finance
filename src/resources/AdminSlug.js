@@ -16,4 +16,7 @@ export default {
   voucherManager: "/admin/voucher-manager",
   depositsManager: "/admin/deposits-manager",
   editDeposits: "/admin/edit-deposits/:type",
+  contactManager: "/admin/contact-manager",
+  createContact: "/admin/create-contact",
+  editContact: "/admin/edit-contact",
 };
