@@ -1171,3 +1171,16 @@ export const getDetailsContact = async (id) => {
       return error.response;
     });
 };
+
+export const updateVoucher = async (data) => {
+  return await axios
+    .post(`${url}/voucher/${data.id}`, data, {
+      headers: await headers(),
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

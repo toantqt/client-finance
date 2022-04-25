@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { getCategoryVoucher, covertDate } from "../../../../api/AdminAPI";
+import {
+  getCategoryVoucher,
+  covertDate,
+  updateVoucher,
+} from "../../../../api/AdminAPI";
 import TableComponent from "../../../../components/Table/Table.component";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import AdminSlug from "../../../../resources/AdminSlug";
 import { useHistory } from "react-router-dom";
+import ModalUpdateVoucher from "../../../../components/Modal/ModalUpdateVoucher";
 
 export default function Voucher(props) {
   const history = useHistory();
@@ -14,13 +19,16 @@ export default function Voucher(props) {
   const [reload, setReload] = useState(false);
   const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState();
+  const [titleVoucher, setTitleVoucher] = useState();
   useEffect(async () => {
     props.handleLoading(true);
     await getCategoryVoucher().then((res) => {
       setData(res.data);
     });
     props.handleLoading(false);
-  }, []);
+  }, [reload]);
 
   const columns = [
     { field: "title", headerName: "TIÊU ĐỀ", width: 400 },
@@ -36,7 +44,7 @@ export default function Voucher(props) {
               aria-label="delete"
               className="btn-action btn-a-2"
               onClick={() => {
-                // handleClickEdit(action.row?.action?._id);
+                handleClickEdit(action.row?.action);
               }}
             >
               <EditIcon />
@@ -77,6 +85,40 @@ export default function Voucher(props) {
     });
   };
 
+  const handleClickEdit = (data) => {
+    setDataUpdate(data);
+    setTitleVoucher(data.titleVoucher);
+    setOpenModal(true);
+    console.log(data);
+  };
+
+  const handleCloseModal = () => {
+    setDataUpdate();
+    setTitleVoucher();
+    setOpenModal(false);
+  };
+
+  const handleUpdateTitleVoucher = async (title) => {
+    const dataVoucher = {
+      id: dataUpdate._id,
+      titleVoucher: title,
+    };
+    console.log(dataVoucher);
+    if (
+      !dataVoucher.id ||
+      dataVoucher.titleVoucher === "" ||
+      !dataVoucher.titleVoucher
+    ) {
+      alert("Xin vui lòng điền đầy đủ thông tin");
+    } else {
+      props.handleLoading(true);
+      await updateVoucher(dataVoucher).then((res) => {
+        handleCloseModal();
+        setReload(!reload);
+      });
+    }
+  };
+
   return (
     <Grid>
       <div className="head-title">
@@ -91,6 +133,12 @@ export default function Voucher(props) {
           handleChangePage={handleChangePage}
         />
       </div>
+      <ModalUpdateVoucher
+        open={openModal}
+        titleVoucher={titleVoucher}
+        handleClose={handleCloseModal}
+        handleUpdateTitleVoucher={handleUpdateTitleVoucher}
+      />
     </Grid>
   );
 }
